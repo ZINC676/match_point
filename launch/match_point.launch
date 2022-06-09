@@ -1,0 +1,16 @@
+<launch>
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager"  args="manager" output="screen"/>
+
+    <param name="input_bag_path"        value="$(find rm_match)/src/" />  <!-- rosbag folder 将rosbag以0.bag, 1.bag...命名!!!!!!!-->
+    <param name="output_pcd_path"       value="$(find rm_match)/src/" />  <!-- path to save new pcd files -->
+    <param name="threshold_lidar"       type="int" value="80" />  <!-- the limit of messages to transfer to the pcd file, 80 means maximum 80 messages of lidar-->
+    <param name="data_num"              type="int" value="2" />  <!-- the number of the rosbag, when in a race please set 1, we already have one pcd file transfer from .obj-->
+
+    <node pkg="nodelet" type="nodelet" name="Match" args="load /Match nodelet_manager" output="screen">
+    <param name="leftSize_" type="double" value="0.1" /> <!-- leftSize to filter pointCloud, the bigger it is, the less point we got -->
+    <param name="pcd_from_race_" type="string" value="$(find rm_match)/src/0.pcd" /> <!-- path to read scanning file from race -->
+    <param name="pcd_from_obj_" type="string" value="$(find rm_match)/src/1.pcd" /> <!-- path to read obj2pcd file (already done) -->
+    </node>
+    
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rm_match)/src/cloud_match.rviz" required="true" />
+</launch>
