@@ -4,7 +4,7 @@
     <param name="input_bag_path"        value="$(find rm_match)/src/" />  <!-- rosbag folder 将rosbag以0.bag, 1.bag...命名!!!!!!!-->
     <param name="output_pcd_path"       value="$(find rm_match)/src/" />  <!-- path to save new pcd files -->
     <param name="threshold_lidar"       type="int" value="80" />  <!-- the limit of messages to transfer to the pcd file, 80 means maximum 80 messages of lidar-->
-    <param name="data_num"              type="int" value="2" />  <!-- the number of the rosbag, when in a race please set 1, we already have one pcd file transfer from .obj-->
+    <param name="data_num"              type="int" value="1" />  <!-- the number of the rosbag, when in a race please set 1, we already have one pcd file transfer from .obj-->
 
     <node pkg="nodelet" type="nodelet" name="Match" args="load /Match nodelet_manager" output="screen">
     <param name="leftSize_" type="double" value="0.1" /> <!-- leftSize to filter pointCloud, the bigger it is, the less point we got -->
